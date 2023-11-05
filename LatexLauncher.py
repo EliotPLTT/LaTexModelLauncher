@@ -7,6 +7,7 @@ import json
 import codecs
 from tkinter import ttk
 from datetime import date
+import os
 
 class App:
     def __init__(self, root, path):
@@ -167,9 +168,20 @@ class App:
         print(LaTexStr)
 
         savePath = tk.filedialog.asksaveasfilename(filetypes=[("Tex file", ".tex")], defaultextension=".tex")
+        
         with codecs.open(savePath,"w+", "utf-8") as f:
             f.write(LaTexStr)
+
             
+        print(savePath)
+        
+        savePathspl = savePath.split("/")
+        for i in range(len(savePathspl)):
+            if " " in savePathspl[i]: savePathspl[i] = '"'+savePathspl[i]+'"'
+        savePath = "/".join(savePathspl)
+
+        
+        os.system("START "+savePath)
 
     def B_NEWMODEL_command(self):
         #Création d'une sous-fenètre
