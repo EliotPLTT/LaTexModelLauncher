@@ -11,32 +11,35 @@ import os
 
 class App:
     def __init__(self, root, path):
-        #setting title
+        # CONFIGURATION DE LA FENETRE
         root.title("Latex Launcher")
-        #setting window size
-        width=350
+        width=360
         height=220
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
+
+        #Polices de caractères
+        bigft = tkFont.Font(size=13)
+        ft = tkFont.Font(size=12)
+        ltft = tkFont.Font(size=10)
+
+        #=== INITIALISATION DES WIDGETS ===
         
         #Titres Colonnes
             #Mes Modèles
         LAB_MyModels=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=14)
-        LAB_MyModels["font"] = ft
+        LAB_MyModels["font"] = bigft
         LAB_MyModels["fg"] = "#333333"
         LAB_MyModels["justify"] = "center"
         LAB_MyModels["text"] = "Mes modèles"
         LAB_MyModels.grid(column=0, row=0)
 
-        
             #Mon Document
         LAB_MonDoc=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=14)
-        LAB_MonDoc["font"] = ft
+        LAB_MonDoc["font"] = bigft
         LAB_MonDoc["fg"] = "#333333"
         LAB_MonDoc["justify"] = "center"
         LAB_MonDoc["text"] = "Mon Document"
@@ -45,8 +48,7 @@ class App:
         #Liste des modèles
         self.LB_Models=tk.Listbox(root)
         self.LB_Models["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=10)
-        self.LB_Models["font"] = ft
+        self.LB_Models["font"] = ltft
         self.LB_Models["fg"] = "#333333"
         self.LB_Models["justify"] = "center"
         self.LB_Models.grid(column=0, row=1, rowspan=5)
@@ -55,7 +57,7 @@ class App:
             #Titre
 
         LAB_Titre=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=12)
+        
         LAB_Titre["font"] = ft
         LAB_Titre["fg"] = "#333333"
         LAB_Titre["justify"] = "center"
@@ -67,7 +69,6 @@ class App:
         
         ENT_Titre=tk.Entry(root)
         ENT_Titre["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=12)
         ENT_Titre["font"] = ft
         ENT_Titre["fg"] = "#333333"
         ENT_Titre["justify"] = "center"
@@ -76,7 +77,6 @@ class App:
         
             #Auteur
         LAB_Auteur=tk.Label(root)
-        ft = tkFont.Font(family='Times',size=12)
         LAB_Auteur["font"] = ft
         LAB_Auteur["fg"] = "#333333"
         LAB_Auteur["justify"] = "center"
@@ -87,7 +87,6 @@ class App:
         
         ENT_Auteur=tk.Entry(root)
         ENT_Auteur["borderwidth"] = "1px"
-        ft = tkFont.Font(family='Times',size=12)
         ENT_Auteur["font"] = ft
         ENT_Auteur["fg"] = "#333333"
         ENT_Auteur["justify"] = "center"
@@ -98,7 +97,6 @@ class App:
             #Générer
         B_GENERER=tk.Button(root)
         B_GENERER["bg"] = "#f0f0f0"
-        ft = tkFont.Font(family='Times',size=12)
         B_GENERER["font"] = ft
         B_GENERER["fg"] = "#000000"
         B_GENERER["justify"] = "center"
@@ -109,7 +107,6 @@ class App:
             #Nouveau Modèle
         B_NEWMODEL=tk.Button(root)
         B_NEWMODEL["bg"] = "#f0f0f0"
-        ft = tkFont.Font(family='Times',size=12)
         B_NEWMODEL["font"] = ft
         B_NEWMODEL["fg"] = "#000000"
         B_NEWMODEL["justify"] = "center"
@@ -120,7 +117,6 @@ class App:
             #Editer
         B_EDIT=tk.Button(root)
         B_EDIT["bg"] = "#f0f0f0"
-        ft = tkFont.Font(family='Times',size=12)
         B_EDIT["font"] = ft
         B_EDIT["fg"] = "#000000"
         B_EDIT["justify"] = "center"
@@ -322,7 +318,7 @@ class App:
         modelid = self.LB_Models.curselection()[0]
         model = self.mem["models"][modelid]
 
-                #Création d'une sous-fenètre
+        #Création d'une sous-fenètre
         tl = tk.Toplevel()
         tl.title("Création de Model")
         tl.geometry("310x390")
@@ -330,7 +326,7 @@ class App:
 
         #Config de la sous-fenètre
 
-        LAB_Title =tk.Label(tl)
+        LAB_Title = tk.Label(tl)
         ft = tkFont.Font(family='Times',size=12)
         LAB_Title["font"] = ft
         LAB_Title["fg"] = "#333333"
@@ -341,7 +337,7 @@ class App:
         modeleTitle = tk.StringVar()
         modeleTitle.set(model["title"])
         
-        ENT_Title=tk.Entry(tl)
+        ENT_Title = tk.Entry(tl)
         ENT_Title["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=12)
         ENT_Title["font"] = ft
@@ -517,7 +513,7 @@ class App:
 if __name__ == "__main__":
     AppVersion = "1.0" #Ne pas modifier svp
     AppDev = "Eliot Poulette" #Ne pas modifier svp
-
+    
     DefaultAuthor = "Eliot Poulette" #Mettez le nom le plus souvent utilisé sur vos documents
 
     print("LatexLauncher - ver{}".format(AppVersion))
